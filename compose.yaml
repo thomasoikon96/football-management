@@ -1,0 +1,16 @@
+services:
+  mariadb:
+    image: mariadb:11.4
+    container_name: football-mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: rootpassword
+      MARIADB_DATABASE: footballdb
+      MARIADB_USER: user
+      MARIADB_PASSWORD: 12345
+    ports:
+      - "3307:3306"
+    volumes:
+      - football_data:/var/lib/mysql
+
+volumes:
+  football_data:
