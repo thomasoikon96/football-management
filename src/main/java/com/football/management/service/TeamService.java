@@ -3,6 +3,7 @@ package com.football.management.service;
 import com.football.management.dto.TeamDTO;
 import com.football.management.entity.Team;
 import com.football.management.repository.TeamRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,18 +12,15 @@ import java.util.List;
 @Service
 public class TeamService {
 
-    private final TeamRepository teamRepository;
-
-    public TeamService(TeamRepository teamRepository){
-        this.teamRepository = teamRepository;
-    }
+    @Autowired
+    private TeamRepository teamRepository;
 
     public List <TeamDTO> getAllTeams(){
 
-        List<Team> teams = teamRepository.findAll();
-        List<TeamDTO> teamDTOs = new ArrayList<>();
+        List <Team> teams = teamRepository.findAll();
+        List <TeamDTO> teamDTOs = new ArrayList<>();
 
-        for(Team team : teams){
+        for (Team team : teams) {
             TeamDTO dto = new TeamDTO();
 
             dto.setId(team.getId());
