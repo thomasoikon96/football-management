@@ -15,7 +15,8 @@ public class TeamService {
     @Autowired
     private TeamRepository teamRepository;
 
-    public List <TeamDTO> getAllTeams(){
+    //GET
+    public List <TeamDTO> getAllTeams() {
 
         List <Team> teams = teamRepository.findAll();
         List <TeamDTO> teamDTOs = new ArrayList<>();
@@ -34,5 +35,47 @@ public class TeamService {
         return teamDTOs;
     }
 
+    //POST
+    public TeamDTO createTeam(TeamDTO teamDTO) {
+        Team team = new Team();
+        team.setName(teamDTO.getName());
+        team.setCountry(teamDTO.getCountry());
+        team.setYearFounded(teamDTO.getYearFounded());
+
+        Team savedTeam = teamRepository.save(team);
+
+        TeamDTO dto = new TeamDTO();
+        dto.setId(savedTeam.getId());
+        dto.setName(savedTeam.getName());
+        dto.setCountry(savedTeam.getCountry());
+        dto.setYearFounded(savedTeam.getYearFounded());
+
+        return dto;
+    }
+
+    //PUT
+    public TeamDTO updateTeam(Integer id, TeamDTO teamDTO) {
+        Team updatedTeam = teamRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Team not found with id: " + id));
+
+        updatedTeam.setName(teamDTO.getName());
+        updatedTeam.setCountry(teamDTO.getCountry());
+        updatedTeam.setYearFounded(teamDTO.getYearFounded());
+
+        teamRepository.save(updatedTeam);
+
+        TeamDTO dto = new TeamDTO();
+        dto.setId(updatedTeam.getId());
+        dto.setName(updatedTeam.getName());
+        dto.setCountry(updatedTeam.getCountry());
+        dto.setYearFounded(updatedTeam.getYearFounded());
+
+        return dto;
+    }
+
+    //DELETE
+    public void deleteTeam(Integer id) {
+        teamRepository.deleteById(id);
+    }
 
 }
