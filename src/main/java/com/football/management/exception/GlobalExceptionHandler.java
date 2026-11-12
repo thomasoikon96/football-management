@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(DataAccessException.class)
-    public ResponseEntity<String> handleDatabaseException(DataAccessException ex){
+    public ResponseEntity<String> handleDatabaseException(DataAccessException ex) {
 
         return ResponseEntity
                 .status(HttpStatus.SERVICE_UNAVAILABLE)
