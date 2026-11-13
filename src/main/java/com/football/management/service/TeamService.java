@@ -37,18 +37,18 @@ public class TeamService {
 
     //POST
     public TeamDTO createTeam(TeamDTO teamDTO) {
-        Team team = new Team();
-        team.setName(teamDTO.getName());
-        team.setCountry(teamDTO.getCountry());
-        team.setYearFounded(teamDTO.getYearFounded());
+        Team createdTeam = new Team();
+        createdTeam.setName(teamDTO.getName());
+        createdTeam.setCountry(teamDTO.getCountry());
+        createdTeam.setYearFounded(teamDTO.getYearFounded());
 
-        Team savedTeam = teamRepository.save(team);
+        teamRepository.save(createdTeam);
 
         TeamDTO dto = new TeamDTO();
-        dto.setId(savedTeam.getId());
-        dto.setName(savedTeam.getName());
-        dto.setCountry(savedTeam.getCountry());
-        dto.setYearFounded(savedTeam.getYearFounded());
+        dto.setId(createdTeam.getId());
+        dto.setName(createdTeam.getName());
+        dto.setCountry(createdTeam.getCountry());
+        dto.setYearFounded(createdTeam.getYearFounded());
 
         return dto;
     }
