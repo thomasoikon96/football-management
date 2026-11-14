@@ -31,7 +31,7 @@ public class PlayerService {
             dto.setFirstName(player.getFirstName());
             dto.setLastName(player.getLastName());
             dto.setPosition(player.getPosition());
-            dto.setAge(player.getAge());
+            dto.setDateOfBirth(player.getDateOfBirth());
 
             if(player.getTeam() != null) {
                 dto.setTeamId(player.getTeam().getId());
@@ -48,7 +48,7 @@ public class PlayerService {
         Player createdPlayer = new Player();
         createdPlayer.setFirstName(playerDTO.getFirstName());
         createdPlayer.setLastName(playerDTO.getLastName());
-        createdPlayer.setAge(playerDTO.getAge());
+        createdPlayer.setDateOfBirth(playerDTO.getDateOfBirth());
         createdPlayer.setPosition(playerDTO.getPosition());
         if(playerDTO.getTeamId() != null) {
             Team team = teamRepository.findById(playerDTO.getTeamId())
@@ -65,7 +65,7 @@ public class PlayerService {
         dto.setId(createdPlayer.getId());
         dto.setFirstName(createdPlayer.getFirstName());
         dto.setLastName(createdPlayer.getLastName());
-        dto.setAge(createdPlayer.getAge());
+        dto.setDateOfBirth(createdPlayer.getDateOfBirth());
         dto.setPosition(createdPlayer.getPosition());
         if(createdPlayer.getTeam() != null) {
             dto.setTeamId(createdPlayer.getTeam().getId());
@@ -82,7 +82,7 @@ public class PlayerService {
 
         player.setFirstName(playerDTO.getFirstName());
         player.setLastName(playerDTO.getLastName());
-        player.setAge(playerDTO.getAge());
+        player.setDateOfBirth(playerDTO.getDateOfBirth());
         player.setPosition(playerDTO.getPosition());
         if(playerDTO.getTeamId() != null) {
             Team team = teamRepository.findById(playerDTO.getTeamId())
@@ -99,7 +99,7 @@ public class PlayerService {
         dto.setId(player.getId());
         dto.setFirstName(player.getFirstName());
         dto.setLastName(player.getLastName());
-        dto.setAge(player.getAge());
+        dto.setDateOfBirth(player.getDateOfBirth());
         dto.setPosition(player.getPosition());
         if(player.getTeam() != null) {
             dto.setTeamId(player.getTeam().getId());
