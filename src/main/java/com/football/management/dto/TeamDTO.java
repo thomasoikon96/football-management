@@ -6,6 +6,6 @@ import lombok.Data;
 public class TeamDTO {
     private Integer id;
     private String name;
-    private String country;
+    private CountryDTO country;
     private Integer yearFounded;
 }

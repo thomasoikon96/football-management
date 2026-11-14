@@ -15,8 +15,9 @@ public class Team {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "country")
-    private String country;
+    @ManyToOne
+    @JoinColumn(name = "n_country_id")
+    private Country country;
 
     @Column(name = "year_founded")
     private Integer yearFounded;
