@@ -101,6 +101,7 @@ public class TeamService {
             CountryDTO countryDTO = new CountryDTO();
             countryDTO.setId(updatedTeam.getCountry().getId());
             countryDTO.setName(updatedTeam.getCountry().getName());
+            dto.setCountry(countryDTO);
         }
 
         return dto;
