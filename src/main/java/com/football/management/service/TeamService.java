@@ -6,6 +6,7 @@ import com.football.management.entity.Country;
 import com.football.management.entity.Team;
 import com.football.management.repository.CountryRepository;
 import com.football.management.repository.TeamRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,15 +30,11 @@ public class TeamService {
 
         for (Team team : teams) {
             TeamDTO dto = new TeamDTO();
-
-            dto.setId(team.getId());
-            dto.setName(team.getName());
-            dto.setYearFounded(team.getYearFounded());
+            BeanUtils.copyProperties(team, dto, "country");
 
             if(team.getCountry() != null) {
                 CountryDTO countryDTO = new CountryDTO();
-                countryDTO.setId(team.getCountry().getId());
-                countryDTO.setName(team.getCountry().getName());
+                BeanUtils.copyProperties(team.getCountry(), countryDTO);
                 dto.setCountry(countryDTO);
             }
 
@@ -50,8 +47,7 @@ public class TeamService {
     //POST
     public TeamDTO createTeam(TeamDTO teamDTO) {
         Team createdTeam = new Team();
-        createdTeam.setName(teamDTO.getName());
-        createdTeam.setYearFounded(teamDTO.getYearFounded());
+        BeanUtils.copyProperties(teamDTO, createdTeam, "id", "country");
 
         if(teamDTO.getCountry() != null && teamDTO.getCountry().getId() != null) {
             Country country = countryRepository.findById(teamDTO.getCountry().getId())
@@ -62,14 +58,11 @@ public class TeamService {
         teamRepository.save(createdTeam);
 
         TeamDTO dto = new TeamDTO();
-        dto.setId(createdTeam.getId());
-        dto.setName(createdTeam.getName());
-        dto.setYearFounded(createdTeam.getYearFounded());
+        BeanUtils.copyProperties(createdTeam, dto, "country");
 
         if(createdTeam.getCountry() != null) {
             CountryDTO countryDTO = new CountryDTO();
-            countryDTO.setId(createdTeam.getCountry().getId());
-            countryDTO.setName(createdTeam.getCountry().getName());
+            BeanUtils.copyProperties(createdTeam.getCountry(), countryDTO);
             dto.setCountry(countryDTO);
         }
 
@@ -81,8 +74,7 @@ public class TeamService {
         Team updatedTeam = teamRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Team not found with id: " + id));
 
-        updatedTeam.setName(teamDTO.getName());
-        updatedTeam.setYearFounded(teamDTO.getYearFounded());
+        BeanUtils.copyProperties(teamDTO,updatedTeam, "id", "country");
 
         if(teamDTO.getCountry() != null && teamDTO.getCountry().getId() != null) {
             Country country = countryRepository.findById(teamDTO.getCountry().getId())
@@ -93,14 +85,11 @@ public class TeamService {
         teamRepository.save(updatedTeam);
 
         TeamDTO dto = new TeamDTO();
-        dto.setId(updatedTeam.getId());
-        dto.setName(updatedTeam.getName());
-        dto.setYearFounded(updatedTeam.getYearFounded());
+        BeanUtils.copyProperties(updatedTeam, dto, "country");
 
         if(updatedTeam.getCountry() != null) {
             CountryDTO countryDTO = new CountryDTO();
-            countryDTO.setId(updatedTeam.getCountry().getId());
-            countryDTO.setName(updatedTeam.getCountry().getName());
+            BeanUtils.copyProperties(updatedTeam.getCountry(), countryDTO);
             dto.setCountry(countryDTO);
         }
 
